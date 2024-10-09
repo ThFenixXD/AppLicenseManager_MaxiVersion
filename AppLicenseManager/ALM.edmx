@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_AppLicenseManager_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_chaveativacao">
+          <Key>
+            <PropertyRef Name="cdChaveAtivacao" />
+          </Key>
+          <Property Name="cdChaveAtivacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cdSoftware" Type="int" Nullable="false" />
+          <Property Name="cdMaquina" Type="int" Nullable="false" />
+          <Property Name="cdStatus" Type="int" Nullable="false" />
+          <Property Name="cdTipoLicenca" Type="int" Nullable="false" />
+          <Property Name="data_aquisicao" Type="datetime" />
+          <Property Name="data_validade" Type="datetime" />
+          <Property Name="chaveAtivacao" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_fabricantes">
+          <Key>
+            <PropertyRef Name="cdFabricante" />
+          </Key>
+          <Property Name="cdFabricante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomeFabricante" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="data_cadastro" Type="date" Nullable="false" />
+          <Property Name="cdStatus" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_maquinas">
+          <Key>
+            <PropertyRef Name="cdMaquina" />
+          </Key>
+          <Property Name="cdMaquina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hostname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="cdSetor" Type="int" Nullable="false" />
+          <Property Name="cdStatus" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_permissoes">
+          <Key>
+            <PropertyRef Name="cdPermissao" />
+          </Key>
+          <Property Name="cdPermissao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cdUsuario" Type="int" Nullable="false" />
+          <Property Name="cdSitemap" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_setores">
+          <Key>
+            <PropertyRef Name="cdSetor" />
+          </Key>
+          <Property Name="cdSetor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomeSetor" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sitemap">
+          <Key>
+            <PropertyRef Name="cdMenu" />
+          </Key>
+          <Property Name="cdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cdMenuPai" Type="int" />
+          <Property Name="descMenu" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="255" />
+          <Property Name="icone_fa" Type="nvarchar" MaxLength="255" />
+          <Property Name="icone_bootstrap" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tb_softwares">
+          <Key>
+            <PropertyRef Name="cdSoftware" />
+          </Key>
+          <Property Name="cdSoftware" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cdFabricante" Type="int" Nullable="false" />
+          <Property Name="cdTipoLicenca" Type="int" Nullable="false" />
+          <Property Name="nomeSoftware" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="cdStatus" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_status">
+          <Key>
+            <PropertyRef Name="cdStatus" />
+          </Key>
+          <Property Name="cdStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tb_tipolicenca">
+          <Key>
+            <PropertyRef Name="cdTipoLicenca" />
+          </Key>
+          <Property Name="cdTipoLicenca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipoLicenca" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_tipoUsuario">
+          <Key>
+            <PropertyRef Name="cdTipoUsuario" />
+          </Key>
+          <Property Name="cdTipoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipoUsuario" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_usuarios">
+          <Key>
+            <PropertyRef Name="cdUsuario" />
+          </Key>
+          <Property Name="cdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomeUsuario" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="senha" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="cdTipoUsuario" Type="int" Nullable="false" />
+          <Property Name="dataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="cdStatusUsuario" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_AppLicenseManager_MAXI.dbo.vw_permissaoacesso' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_permissaoacesso">
+          <Key>
+            <PropertyRef Name="cdUsuario" />
+          </Key>
+          <Property Name="cdUsuario" Type="int" Nullable="false" />
+          <Property Name="Caminho" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="db_AppLicenseManager_ModelStoreContainer">
+          <EntitySet Name="tb_chaveativacao" EntityType="Self.tb_chaveativacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_fabricantes" EntityType="Self.tb_fabricantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_maquinas" EntityType="Self.tb_maquinas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_permissoes" EntityType="Self.tb_permissoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_setores" EntityType="Self.tb_setores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sitemap" EntityType="Self.tb_sitemap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_softwares" EntityType="Self.tb_softwares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_status" EntityType="Self.tb_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipolicenca" EntityType="Self.tb_tipolicenca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipoUsuario" EntityType="Self.tb_tipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_usuarios" EntityType="Self.tb_usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_permissaoacesso" EntityType="Self.vw_permissaoacesso" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_permissaoacesso].[cdUsuario] AS [cdUsuario], 
+    [vw_permissaoacesso].[Caminho] AS [Caminho]
+    FROM [dbo].[vw_permissaoacesso] AS [vw_permissaoacesso]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_AppLicenseManager_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_chaveativacao">
+          <Key>
+            <PropertyRef Name="cdChaveAtivacao" />
+          </Key>
+          <Property Name="cdChaveAtivacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cdSoftware" Type="Int32" Nullable="false" />
+          <Property Name="cdMaquina" Type="Int32" Nullable="false" />
+          <Property Name="cdStatus" Type="Int32" Nullable="false" />
+          <Property Name="cdTipoLicenca" Type="Int32" Nullable="false" />
+          <Property Name="data_aquisicao" Type="DateTime" Precision="3" />
+          <Property Name="data_validade" Type="DateTime" Precision="3" />
+          <Property Name="chaveAtivacao" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_fabricantes">
+          <Key>
+            <PropertyRef Name="cdFabricante" />
+          </Key>
+          <Property Name="cdFabricante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomeFabricante" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_cadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cdStatus" Type="Int32" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_maquinas">
+          <Key>
+            <PropertyRef Name="cdMaquina" />
+          </Key>
+          <Property Name="cdMaquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hostname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cdSetor" Type="Int32" Nullable="false" />
+          <Property Name="cdStatus" Type="Int32" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_permissoes">
+          <Key>
+            <PropertyRef Name="cdPermissao" />
+          </Key>
+          <Property Name="cdPermissao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="cdSitemap" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_setores">
+          <Key>
+            <PropertyRef Name="cdSetor" />
+          </Key>
+          <Property Name="cdSetor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomeSetor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sitemap">
+          <Key>
+            <PropertyRef Name="cdMenu" />
+          </Key>
+          <Property Name="cdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cdMenuPai" Type="Int32" />
+          <Property Name="descMenu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="icone_fa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="icone_bootstrap" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_softwares">
+          <Key>
+            <PropertyRef Name="cdSoftware" />
+          </Key>
+          <Property Name="cdSoftware" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cdFabricante" Type="Int32" Nullable="false" />
+          <Property Name="cdTipoLicenca" Type="Int32" Nullable="false" />
+          <Property Name="nomeSoftware" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cdStatus" Type="Int32" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_status">
+          <Key>
+            <PropertyRef Name="cdStatus" />
+          </Key>
+          <Property Name="cdStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_tipolicenca">
+          <Key>
+            <PropertyRef Name="cdTipoLicenca" />
+          </Key>
+          <Property Name="cdTipoLicenca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoLicenca" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_tipoUsuario">
+          <Key>
+            <PropertyRef Name="cdTipoUsuario" />
+          </Key>
+          <Property Name="cdTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoUsuario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_usuarios">
+          <Key>
+            <PropertyRef Name="cdUsuario" />
+          </Key>
+          <Property Name="cdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomeUsuario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cdTipoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="dataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cdStatusUsuario" Type="Int32" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_permissaoacesso">
+          <Key>
+            <PropertyRef Name="cdUsuario" />
+          </Key>
+          <Property Name="cdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Caminho" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="db_AppLicenseManager_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_chaveativacao" EntityType="Self.tb_chaveativacao" />
+          <EntitySet Name="tb_fabricantes" EntityType="Self.tb_fabricantes" />
+          <EntitySet Name="tb_maquinas" EntityType="Self.tb_maquinas" />
+          <EntitySet Name="tb_permissoes" EntityType="Self.tb_permissoes" />
+          <EntitySet Name="tb_setores" EntityType="Self.tb_setores" />
+          <EntitySet Name="tb_sitemap" EntityType="Self.tb_sitemap" />
+          <EntitySet Name="tb_softwares" EntityType="Self.tb_softwares" />
+          <EntitySet Name="tb_status" EntityType="Self.tb_status" />
+          <EntitySet Name="tb_tipolicenca" EntityType="Self.tb_tipolicenca" />
+          <EntitySet Name="tb_tipoUsuario" EntityType="Self.tb_tipoUsuario" />
+          <EntitySet Name="tb_usuarios" EntityType="Self.tb_usuarios" />
+          <EntitySet Name="vw_permissaoacesso" EntityType="Self.vw_permissaoacesso" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_AppLicenseManager_ModelStoreContainer" CdmEntityContainer="db_AppLicenseManager_Entities">
+          <EntitySetMapping Name="tb_chaveativacao">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_chaveativacao">
+              <MappingFragment StoreEntitySet="tb_chaveativacao">
+                <ScalarProperty Name="cdChaveAtivacao" ColumnName="cdChaveAtivacao" />
+                <ScalarProperty Name="cdSoftware" ColumnName="cdSoftware" />
+                <ScalarProperty Name="cdMaquina" ColumnName="cdMaquina" />
+                <ScalarProperty Name="cdStatus" ColumnName="cdStatus" />
+                <ScalarProperty Name="cdTipoLicenca" ColumnName="cdTipoLicenca" />
+                <ScalarProperty Name="data_aquisicao" ColumnName="data_aquisicao" />
+                <ScalarProperty Name="data_validade" ColumnName="data_validade" />
+                <ScalarProperty Name="chaveAtivacao" ColumnName="chaveAtivacao" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_fabricantes">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_fabricantes">
+              <MappingFragment StoreEntitySet="tb_fabricantes">
+                <ScalarProperty Name="cdFabricante" ColumnName="cdFabricante" />
+                <ScalarProperty Name="nomeFabricante" ColumnName="nomeFabricante" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+                <ScalarProperty Name="cdStatus" ColumnName="cdStatus" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_maquinas">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_maquinas">
+              <MappingFragment StoreEntitySet="tb_maquinas">
+                <ScalarProperty Name="cdMaquina" ColumnName="cdMaquina" />
+                <ScalarProperty Name="hostname" ColumnName="hostname" />
+                <ScalarProperty Name="cdSetor" ColumnName="cdSetor" />
+                <ScalarProperty Name="cdStatus" ColumnName="cdStatus" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_permissoes">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_permissoes">
+              <MappingFragment StoreEntitySet="tb_permissoes">
+                <ScalarProperty Name="cdPermissao" ColumnName="cdPermissao" />
+                <ScalarProperty Name="cdUsuario" ColumnName="cdUsuario" />
+                <ScalarProperty Name="cdSitemap" ColumnName="cdSitemap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_setores">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_setores">
+              <MappingFragment StoreEntitySet="tb_setores">
+                <ScalarProperty Name="cdSetor" ColumnName="cdSetor" />
+                <ScalarProperty Name="nomeSetor" ColumnName="nomeSetor" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sitemap">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_sitemap">
+              <MappingFragment StoreEntitySet="tb_sitemap">
+                <ScalarProperty Name="cdMenu" ColumnName="cdMenu" />
+                <ScalarProperty Name="cdMenuPai" ColumnName="cdMenuPai" />
+                <ScalarProperty Name="descMenu" ColumnName="descMenu" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="icone_fa" ColumnName="icone_fa" />
+                <ScalarProperty Name="icone_bootstrap" ColumnName="icone_bootstrap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_softwares">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_softwares">
+              <MappingFragment StoreEntitySet="tb_softwares">
+                <ScalarProperty Name="cdSoftware" ColumnName="cdSoftware" />
+                <ScalarProperty Name="cdFabricante" ColumnName="cdFabricante" />
+                <ScalarProperty Name="cdTipoLicenca" ColumnName="cdTipoLicenca" />
+                <ScalarProperty Name="nomeSoftware" ColumnName="nomeSoftware" />
+                <ScalarProperty Name="cdStatus" ColumnName="cdStatus" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_status">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_status">
+              <MappingFragment StoreEntitySet="tb_status">
+                <ScalarProperty Name="cdStatus" ColumnName="cdStatus" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipolicenca">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_tipolicenca">
+              <MappingFragment StoreEntitySet="tb_tipolicenca">
+                <ScalarProperty Name="cdTipoLicenca" ColumnName="cdTipoLicenca" />
+                <ScalarProperty Name="tipoLicenca" ColumnName="tipoLicenca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipoUsuario">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_tipoUsuario">
+              <MappingFragment StoreEntitySet="tb_tipoUsuario">
+                <ScalarProperty Name="cdTipoUsuario" ColumnName="cdTipoUsuario" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_usuarios">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.tb_usuarios">
+              <MappingFragment StoreEntitySet="tb_usuarios">
+                <ScalarProperty Name="cdUsuario" ColumnName="cdUsuario" />
+                <ScalarProperty Name="nomeUsuario" ColumnName="nomeUsuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="cdTipoUsuario" ColumnName="cdTipoUsuario" />
+                <ScalarProperty Name="dataCadastro" ColumnName="dataCadastro" />
+                <ScalarProperty Name="cdStatusUsuario" ColumnName="cdStatusUsuario" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_permissaoacesso">
+            <EntityTypeMapping TypeName="db_AppLicenseManager_Model.vw_permissaoacesso">
+              <MappingFragment StoreEntitySet="vw_permissaoacesso">
+                <ScalarProperty Name="cdUsuario" ColumnName="cdUsuario" />
+                <ScalarProperty Name="Caminho" ColumnName="Caminho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

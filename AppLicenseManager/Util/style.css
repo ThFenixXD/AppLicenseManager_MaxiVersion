@@ -1,0 +1,236 @@
+﻿html, body, form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: "Afacad Flux", sans-serif;
+}
+
+/*Page Login*/
+
+#login-page {
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgb(255 255 255);
+    display: flex;
+}
+
+.login-container {
+    border: 1px solid #3c4494;
+    border-radius: 40px;
+    box-shadow: 4px 4px 4px #3c4494;
+    padding: 1.5em;
+    box-sizing: content-box;
+    color: #3c4494;
+}
+
+    .login-container h1 {
+        color: #f38334;
+    }
+
+    .login-container p {
+        font-size: 1.2em;
+    }
+
+    .login-container .form-label {
+        margin: -0.1em 0 0 0.5em;
+        font-size: 1.1em;
+        color: inherit;
+    }
+
+        .login-container .form-label::after {
+            background-color: transparent;
+        }
+
+    .login-container .form-control {
+        background-color: transparent;
+        border: 1px solid #3c4494;
+        border-radius: 10px;
+        margin-bottom: 0.5em;
+        color: inherit;
+        display: flex;
+        height: 100%;
+        padding-top: 2em;
+        font-size: 1.2em;
+    }
+
+    .login-container .content-login .form-floating {
+        height: 4em;
+    }
+
+
+
+#btn_logon {
+    width: 25%;
+    margin-left: 70%;
+    border-radius: 40px;
+    border: 1px solid rgb(21 85 154 / 0.77);
+    background: linear-gradient(to bottom, rgb(255 255 255), #f38334);
+    transition: .10s ease-in-out;
+}
+
+    #btn_logon:hover {
+        filter: brightness(1.05);
+        color: black;
+    }
+
+/*Site Layout*/
+
+#page-layout {
+    min-height: 100vh;
+    width: 100%;
+    margin: inherit;
+    padding: inherit;
+}
+
+/*Side Panel*/
+
+#sidePanel {
+    width: 16%;
+    min-height: 100vh;
+    border-right: 2px solid #3c4494;
+}
+
+    #sidePanel #container-logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 8em;
+    }
+
+        #sidePanel #container-logo #logo-maxi {
+            margin: auto;
+            width: 100%;
+            height: 65%;
+        }
+
+    #sidePanel .list-group-item {
+        list-style: none;
+    }
+
+    #sidePanel .menu-link,
+    #sidePanel .subMenu-link {
+        text-decoration: none;
+    }
+
+    #sidePanel .subMenu {
+        list-style: none;
+    }
+
+/*Main*/
+
+#main {
+    width: 84%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+#header-main, #footer-main {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 2.5em;
+    color: white;
+    padding: 0 0.5em;
+}
+
+#header-main {
+    background-color: #f38334;
+}
+
+#footer-main {
+    margin-top: auto;
+    background-color: #3c4494;
+}
+
+    #footer-main p {
+        margin: auto 0;
+    }
+
+#main-content {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    padding: 0em 1.5em 0;
+}
+
+/*Default Header Layout*/
+
+.header-page {
+    padding: 2em 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+    .header-page .breadcrumb li a {
+        text-decoration: none;
+    }
+
+    .header-page .title-page {
+        font-size: 1.8em;
+    }
+
+/*Content*/
+
+/*RadToolBar - Menu Usuários*/
+
+.rtb-menu {
+    padding: 0.8em;
+    transition: .20s ease;
+    border-radius: 25px;
+}
+
+    .rtb-menu:hover {
+        background-color: #f38334;
+        color: #3c4494;
+    }
+
+    .rtb-menu .text-rtb, .icon-rtb {
+        font-size: 1.2em;
+    }
+
+    .rtb-menu .text-rtb {
+        margin-left: .5em;
+        font-weight: 500;
+    }
+
+.btn-opGrid {
+    border-radius: 50px;
+    transform: scale(0.7);
+}
+
+.dropdown-opGrid {
+    width: auto;
+    padding: 0;
+}
+
+    .dropdown-opGrid li {
+        border-radius: 5px;
+        padding: 0.5em;
+        transition: .20s ease;
+    }
+
+        .dropdown-opGrid li:hover {
+            background-color: #f38334;
+            color: #3c4494;
+        }
+
+/*#region DropDown Buttons */
+
+.lnkOp,
+.lnk-profileMenu {
+    text-decoration: none;
+}
+
+.text-op,
+.text-profileMenu {
+    margin-left: 1em;
+}
+
+/*#endregion */
