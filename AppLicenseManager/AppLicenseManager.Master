@@ -50,7 +50,7 @@
                     <ul class="list-group">
                         <%-- Home --%>
                         <li class="list-group-item">
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="Default.aspx">
                                 <span class="icon-link"><i class="fa-solid fa-house"></i></span>
                                 <span class="text-link">Home</span>
                             </a>
