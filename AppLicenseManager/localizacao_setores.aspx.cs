@@ -70,27 +70,37 @@ namespace AppLicenseManager
                             setor = querySetor.FirstOrDefault();
                         }
                     }
+                    //Validação de Setor
                     var setorExistente = _ctx.tb_setores.FirstOrDefault(set => set.nomeSetor == txtSetor.Text.Trim());
 
+                    //Verifica Registro
                     if (setorExistente != null && setorExistente.deleted == 0)
                     {
                         if (setorExistente.nomeSetor == txtSetor.Text.Trim())
                         {
-                            throw new Exception("Este setor já está registrado.");
+                            throw new Exception("Erro: Este setor já está registrado.");
                         }
                     }
 
-                    setor.nomeSetor = txtSetor.Text.Trim();
+                    //Validação do nomeSetor
+                    if (txtSetor.Text == "")
+                    {
+                        throw new Exception("Erro: Setor não informado.");
+                    }
+                    else
+                    {
+                        setor.nomeSetor = txtSetor.Text.ToUpper().Trim();
+                    }
+
                     setor.deleted = 0;
 
                     if (string.IsNullOrEmpty(hdfcdSetor.Value))
                     {
                         _ctx.tb_setores.Add(setor);
-                        Framework.Alerta("Sucesso", "adicionado com sucesso", "success");
                     }
 
                     _ctx.SaveChanges();
-                    Framework.Alerta("Sucesso", "Alterações efetuadas", "success");
+                    Framework.Alerta("Sucesso", string.IsNullOrEmpty(hdfcdSetor.Value) ? "Setor adicionado com sucesso" : "Alterações efetuadas", "success");
                     LimpaCampos();
                     Framework.EscondePaineis(pnlCadastroSetores);
                     pnlGridSetores.Visible = true;
@@ -99,13 +109,19 @@ namespace AppLicenseManager
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Este setor já está registrado."))
+                switch (ex.Message)
                 {
-                    Framework.Alerta("Erro", "Setor já registrado no sistema", "error");
-                }
-                else
-                {
-                    Framework.Alerta("Erro", "Ocorreu um erro na execução do método AdicionaFabricante(): " + ex.Message, "error");
+                    case "Erro: Este setor já está registrado.":
+                        Framework.Alerta("Erro", "Setor já registrado no sistema.", "error");
+                        break;
+
+                    case "Erro: Setor não informado.":
+                        Framework.Alerta("Erro", "Setor não informado.", "error");
+                        break;
+
+                    default:
+                        Framework.Alerta("Erro", $"Ocorreu um erro na execução do método AdicionarSetor(): {ex.Message}", "error");
+                        break;
                 }
             }
         }

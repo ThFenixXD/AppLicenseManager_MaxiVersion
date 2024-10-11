@@ -100,29 +100,57 @@ namespace AppLicenseManager
                             software = querySoftware.FirstOrDefault();
                         }
                     }
+                    //Validação Software
                     var softwareExistente = _ctx.tb_softwares.FirstOrDefault(soft => soft.nomeSoftware == txtNomeSoftware.Text.Trim());
 
-                    if (softwareExistente != null && softwareExistente.deleted == 0)
+                    //Verifica Registro
+                    if (softwareExistente != null && softwareExistente.cdSoftware != software.cdSoftware && softwareExistente.deleted == 0)
                     {
                         if (softwareExistente.nomeSoftware == txtNomeSoftware.Text.Trim())
                         {
-                            throw new Exception("Este software já está registrado.");
+                            throw new Exception("Erro: Este software já está registrado.");
                         }
                     }
 
-                    software.nomeSoftware = txtNomeSoftware.Text.Trim();
-                    software.cdFabricante = Convert.ToInt32(ddlFabricante.SelectedValue);
-                    software.cdStatus = Convert.ToInt32(ddlStatusSoftware.SelectedValue);
+                    //Validação Nome Software
+                    if (txtNomeSoftware.Text == "")
+                    {
+                        throw new Exception("Erro: Nome do software não informado.");
+                    }
+                    else
+                    {
+                        software.nomeSoftware = txtNomeSoftware.Text.Trim();
+                    }
+
+                    //Validação Fabricante
+                    if (ddlFabricante.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Fabricante não selecionado.");
+                    }
+                    else
+                    {
+                        software.cdFabricante = Convert.ToInt32(ddlFabricante.SelectedValue);
+                    }
+
+                    //Validação Status
+                    if (ddlStatusSoftware.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Status não selecionado.");
+                    }
+                    else
+                    {
+                        software.cdStatus = Convert.ToInt32(ddlStatusSoftware.SelectedValue);
+                    }
+
                     software.deleted = 0;
 
                     if (string.IsNullOrEmpty(hdfcdSoftware.Value))
                     {
                         _ctx.tb_softwares.Add(software);
-                        Framework.Alerta("Sucesso", "Adicionado com sucesso", "success");
                     }
 
                     _ctx.SaveChanges();
-                    Framework.Alerta("Sucesso", "Alterações efetuadas", "success");
+                    Framework.Alerta("Sucesso", string.IsNullOrEmpty(hdfcdSoftware.Value) ? "Software adicionado com sucesso" : "Alterações efetuadas", "success");
                     LimpaCampos();
                     Framework.EscondePaineis(pnlCadastroSoftware);
                     pnlGridSoftwares.Visible = true;
@@ -131,13 +159,27 @@ namespace AppLicenseManager
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Este software já está registrado."))
+                switch (ex.Message)
                 {
-                    Framework.Alerta("Erro", "Software já registrado no sistema.", "error");
-                }
-                else
-                {
-                    Framework.Alerta("Erro", "Ocorreu um erro na execução do método AdicionarSoftware(): " + ex.Message, "error");
+                    case "Erro: Este software já está registrado.":
+                        Framework.Alerta("Erro", "Software já registrado no sistema.", "error");
+                        break;
+
+                    case "Erro: Nome do software não informado.":
+                        Framework.Alerta("Erro", "Nome do software não informado.", "error");
+                        break;
+
+                    case "Erro: Fabricante não selecionado.":
+                        Framework.Alerta("Erro", "Fabricante não selecionado.", "error");
+                        break;
+
+                    case "Erro: Status não selecionado.":
+                        Framework.Alerta("Erro", "Status não selecionado.", "error");
+                        break;
+
+                    default:
+                        Framework.Alerta("Erro", $"Ocorreu um erro na execução do método AdicionarSoftware(): {ex.Message}", "error");
+                        break;
                 }
             }
         }

@@ -179,7 +179,7 @@ namespace AppLicenseManager
                     //Valida chave de ativação
                     var chaveExistente = _ctx.tb_chaveativacao.FirstOrDefault(key => key.chaveAtivacao == txtChaveAtivacao.Text.Trim());
 
-                    if (chaveExistente != null && chaveExistente.deleted == 0)
+                    if (chaveExistente != null && chaveExistente.cdChaveAtivacao != chave.cdChaveAtivacao && chaveExistente.deleted == 0)
                     {
                         if (chaveExistente.chaveAtivacao == txtChaveAtivacao.Text.Trim())
                         {
@@ -267,31 +267,6 @@ namespace AppLicenseManager
                         Framework.Alerta("Erro", "Ocorreu um erro na execução do método AdicionarChave(): " + ex.Message, "error");
                         break;
                 }
-
-                //if (ex.Message.Contains("Esta chave já está registrada."))
-                //{
-                //    Framework.Alerta("Erro", "Chave já registrada no sistema.", "error");
-                //}
-                //else if (ex.Message.Contains("Data de aquisição maior que a data atual."))
-                //{
-                //    Framework.Alerta("Erro", "Data de aquisição maior que a data atual.", "error");
-                //}
-                //else if (ex.Message.Contains("Data de validade menor que a data aquisição."))
-                //{
-                //    Framework.Alerta("Erro", "Data de validade menor que a data aquisição.", "error");
-                //}
-                //else if (ex.Message.Contains("Erro ao adicionar chave de ativação, verifique os parametros inseridos e tente novamente. Caso necessário entre em contato com o Administrador."))
-                //{
-                //    Framework.Alerta("Erro", "Erro ao adicionar chave de ativação, verifique os parametros inseridos e tente novamente. Caso necessário entre em contato com o Administrador.", "error");
-                //}
-                //else if (ex.Message.Contains("Data de validade obrigatória quando selecionado 'Licença Temporária'."))
-                //{
-                //    Framework.Alerta("Erro", "Data de validade obrigatória quando selecionado 'Licença Temporária'.", "error");
-                //}
-                //else
-                //{
-                //    Framework.Alerta("Erro", "Ocorreu um erro na execução do método AdicionarChave(): " + ex.Message, "error");
-                //}
             }
         }
 

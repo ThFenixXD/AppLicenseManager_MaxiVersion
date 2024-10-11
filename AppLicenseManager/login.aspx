@@ -41,8 +41,9 @@
         <div id="login-page" class="container-fluid">
             <asp:Panel ID="pnlLogin" class="login-container container m-auto w-25" runat="server">
                 <div class="row text-center">
+
+                    <img id="logo" src="Images/Logo Maxi.png" alt="Alternate Text" />
                     <h1>Gerenciador de Licenças</h1>
-                    <h1>Maxi Trust Grupos Geradores</h1>
 
                     <p>Entre com seus dados para autenticar</p>
                 </div>

@@ -75,29 +75,49 @@ namespace AppLicenseManager
                             fabricante = queryFabricante.FirstOrDefault();
                         }
                     }
+                    //Validação de Fabricante
                     var fabricanteExistente = _ctx.tb_fabricantes.FirstOrDefault(fab => fab.nomeFabricante == txtFabricante.Text.Trim());
 
-                    if (fabricanteExistente != null && fabricanteExistente.deleted == 0)
+
+                    //Verifica Registro
+                    if (fabricanteExistente != null && fabricanteExistente.cdFabricante != fabricante.cdFabricante && fabricanteExistente.deleted == 0)
                     {
                         if (fabricanteExistente.nomeFabricante == txtFabricante.Text.Trim())
                         {
-                            throw new Exception("Este fabricante já está registrado.");
+                            throw new Exception("Erro: Este fabricante já está registrado.");
                         }
                     }
 
-                    fabricante.nomeFabricante = txtFabricante.Text.Trim();
+                    //Validação Nome Fabricante
+                    if (txtFabricante.Text == "")
+                    {
+                        throw new Exception("Erro: Nome do fabricante não informado.");
+                    }
+                    else
+                    {
+                        fabricante.nomeFabricante = txtFabricante.Text.Trim();
+                    }
+
+                    //Validação Status
+                    if (ddlStatusFabricante.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Status não selecionado.");
+                    }
+                    else
+                    {
+                        fabricante.cdStatus = Convert.ToInt32(ddlStatusFabricante.SelectedValue);
+                    }
+
                     fabricante.data_cadastro = DateTime.Now;
-                    fabricante.cdStatus = Convert.ToInt32(ddlStatusFabricante.SelectedValue);
                     fabricante.deleted = 0;
 
                     if (string.IsNullOrEmpty(hdfcdFabricante.Value))
                     {
                         _ctx.tb_fabricantes.Add(fabricante);
-                        Framework.Alerta("Sucesso", "Adicionado com sucesso", "success");
                     }
 
                     _ctx.SaveChanges();
-                    Framework.Alerta("Sucesso", "Alterações efetuadas", "success");
+                    Framework.Alerta("Sucesso", string.IsNullOrEmpty(hdfcdFabricante.Value) ? "Fabricante adicionado com sucesso" : "Alterações efetuadas", "success");
                     LimpaCampos();
                     Framework.EscondePaineis(pnlCadastroFabricante);
                     pnlGridFabricantes.Visible = true;
@@ -106,13 +126,23 @@ namespace AppLicenseManager
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Este fabricante já está registrado."))
+                switch (ex.Message)
                 {
-                    Framework.Alerta("Erro", "Fabricante já registrado no sistema", "error");
-                }
-                else
-                {
-                    Framework.Alerta("Erro", "Ocorreu um erro na execução do método AdicionaFabricante(): " + ex.Message, "error");
+                    case "Erro: Este fabricante já está registrado.":
+                        Framework.Alerta("Erro", "Fabricante já registrado no sistema.", "error");
+                        break;
+
+                    case "Erro: Nome do fabricante não informado.":
+                        Framework.Alerta("Erro", "Nome do fabricante não informado.", "error");
+                        break;
+
+                    case "Erro: Status não selecionado.":
+                        Framework.Alerta("Erro", "Status não selecionado.", "error");
+                        break;
+
+                    default:
+                        Framework.Alerta("Erro", $"Ocorreu um erro na execução do método AdicionarUsuario(): {ex.Message}", "error");
+                        break;
                 }
             }
         }

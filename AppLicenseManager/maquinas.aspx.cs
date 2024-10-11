@@ -86,26 +86,54 @@ namespace AppLicenseManager
                             maquina = queryMaquina.FirstOrDefault();
                         }
                     }
+                    //Validação de Máquina
                     var maquinaExistente = _ctx.tb_maquinas.FirstOrDefault(maq => maq.hostname == txtHostname.Text.Trim());
 
-                    if (maquinaExistente != null && maquinaExistente.deleted == 0)
+                    //Verifica Registro
+                    if (maquinaExistente != null && maquinaExistente.cdMaquina != maquina.cdMaquina && maquinaExistente.deleted == 0)
                     {
-                        throw new Exception("Esta máquina já está registrada.");
+                        throw new Exception("Erro: Esta máquina já está registrada.");
                     }
 
-                    maquina.hostname = txtHostname.Text.ToUpper().Trim();
-                    maquina.cdSetor = Convert.ToInt32(ddlSetor.SelectedValue);
-                    maquina.cdStatus = Convert.ToInt32(ddlStatus.SelectedValue);
+                    //Validação Hostname
+                    if (txtHostname.Text == "")
+                    {
+                        throw new Exception("Erro: Hostname não informado.");
+                    }
+                    else
+                    {
+                        maquina.hostname = txtHostname.Text.ToUpper().Trim();
+                    }
+
+                    //Validação Setor
+                    if (ddlSetor.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Setor não informado.");
+                    }
+                    else
+                    {
+                        maquina.cdSetor = Convert.ToInt32(ddlSetor.SelectedValue);
+                    }
+
+                    //Validação Status
+                    if (ddlStatus.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Status não informado.");
+                    }
+                    else
+                    {
+                        maquina.cdStatus = Convert.ToInt32(ddlStatus.SelectedValue);
+                    }
+
                     maquina.deleted = 0;
 
                     if (string.IsNullOrEmpty(hdfcdMaquina.Value))
                     {
                         _ctx.tb_maquinas.Add(maquina);
-                        Framework.Alerta("Sucesso", "Adicionado com sucesso", "success");
                     }
 
                     _ctx.SaveChanges();
-                    Framework.Alerta("Sucesso", "Alterações efetuadas", "success");
+                    Framework.Alerta("Sucesso", string.IsNullOrEmpty(hdfcdMaquina.Value) ? "Máquina adicionada com sucesso" : "Alterações efetuadas", "success");
                     LimpaCampos();
                     Framework.EscondePaineis(pnlCadastroMaquinas);
                     pnlGridMaquinas.Visible = true;
@@ -114,13 +142,27 @@ namespace AppLicenseManager
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Esta máquina já está registrada."))
+                switch (ex.Message)
                 {
-                    Framework.Alerta("Erro", "Máquina já registrada no sistema.", "error");
-                }
-                else
-                {
-                    Framework.Alerta("Erro", "Ocorreu um erro na execução do método AdicionaMaquina(): " + ex.Message, "error");
+                    case "Erro: Esta máquina já está registrada.":
+                        Framework.Alerta("Erro", "Máquina já registrada no sistema.", "error");
+                        break;
+
+                    case "Erro: Hostname não informado.":
+                        Framework.Alerta("Erro", "Hostname não informado.", "error");
+                        break;
+
+                    case "Erro: Setor não informado.":
+                        Framework.Alerta("Erro", "Setor não informado.", "error");
+                        break;
+
+                    case "Erro: Status não informado.":
+                        Framework.Alerta("Erro", "Status não informado.", "error");
+                        break;
+
+                    default:
+                        Framework.Alerta("Erro", $"Ocorreu um erro na execução do método AdicionaMaquina(): {ex.Message}", "error");
+                        break;
                 }
             }
         }

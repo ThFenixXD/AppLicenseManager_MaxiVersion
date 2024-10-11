@@ -255,8 +255,8 @@
                             </div>
 
                             <div class="py-3">
-                                <asp:Button ID="btn_salvar" runat="server" Text="Salvar Alterações" OnClick="btn_salvar_Click" />
-                                <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar Alterações" OnClick="btn_cancelar_Click" />
+                                <asp:Button ID="btn_salvar" runat="server" Text="Salvar Alterações" CssClass="btn_op btn_salvar" OnClick="btn_salvar_Click" />
+                                <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar Alterações" CssClass="btn_op btn_cancelar" OnClick="btn_cancelar_Click" />
                             </div>
 
                         </asp:Panel>
@@ -281,8 +281,8 @@
                             </div>
 
                             <div class="py-3">
-                                <asp:Button ID="btn_salvarPermissoes" runat="server" Text="Salvar Alterações" OnClick="btn_salvarPermissoes_Click" />
-                                <asp:Button ID="btn_cancelarPermissoes" runat="server" Text="Cancelar Alterações" OnClick="btn_cancelarPermissoes_Click" />
+                                <asp:Button ID="btn_salvarPermissoes" runat="server" Text="Salvar Alterações" CssClass="btn_op btn_salvar" OnClick="btn_salvarPermissoes_Click" />
+                                <asp:Button ID="btn_cancelarPermissoes" runat="server" Text="Cancelar Alterações" CssClass="btn_op btn_cancelar" OnClick="btn_cancelarPermissoes_Click" />
                             </div>
 
 

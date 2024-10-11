@@ -93,36 +93,77 @@ namespace AppLicenseManager
                     {
                         int cdUsuario = Convert.ToInt32(hdfcdUsuario.Value);
 
-                        var queryUsuario = (from obj in _ctx.tb_usuarios
-                                            where obj.cdUsuario == cdUsuario
-                                            select obj);
+                        usuario = (from obj in _ctx.tb_usuarios
+                                   where obj.cdUsuario == cdUsuario
+                                   select obj).FirstOrDefault();
 
-                        if (queryUsuario != null)
+                        if (usuario == null)
                         {
-                            usuario = queryUsuario.FirstOrDefault();
+                            throw new Exception("Erro: Usuário não encontrado para edição.");
                         }
                     }
-
+                    //Validação de Usuário
                     var usuarioExistente = _ctx.tb_usuarios.FirstOrDefault(user => user.email == txtEmail.Text.Trim() || user.nomeUsuario == txtNomeUsuario.Text.Trim());
 
-                    if (usuarioExistente != null && usuarioExistente.deleted == 0)
+                    //Verifica Registro E-mail e nome de usuário
+                    if (usuarioExistente != null && usuarioExistente.cdUsuario != usuario.cdUsuario && usuarioExistente.deleted == 0)
                     {
                         if (usuarioExistente.email == txtEmail.Text.Trim())
                         {
-                            throw new Exception("Este e-mail já está registrado.");
+                            throw new Exception("Erro: Este e-mail já está registrado.");
                         }
 
                         if (usuarioExistente.nomeUsuario == txtNomeUsuario.Text.Trim())
                         {
-                            throw new Exception("Este usuário já está registrado.");
+                            throw new Exception("Erro: Este usuário já está registrado.");
                         }
                     }
-                    usuario.nomeUsuario = txtNomeUsuario.Text.Trim();
-                    usuario.cdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
-                    usuario.cdStatusUsuario = Convert.ToInt32(ddlStatusUsuario.SelectedValue);
+
+                    //Validação E-mail de usuário
+                    if (txtEmail.Text == "")
+                    {
+                        throw new Exception("Erro: E-mail de usuário não informado.");
+                    }
+                    else
+                    {
+                        usuario.email = txtEmail.Text.Trim();
+                    }
+
+                    //Validação nome de usuário
+                    if (txtNomeUsuario.Text == "")
+                    {
+                        throw new Exception("Erro: Nome de usuário não informado.");
+                    }
+                    else
+                    {
+                        usuario.nomeUsuario = txtNomeUsuario.Text.Trim();
+                    }
+
+
                     usuario.senha = !string.IsNullOrEmpty(txtSenha.Text) ? CryptoEngine.Criptografar(txtSenha.Text.Trim(), true) : usuario.senha;
                     usuario.deleted = 0;
                     usuario.dataCadastro = DateTime.Now;
+
+
+                    //Validação tipo de usuário
+                    if (ddlTipoUsuario.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Tipo de usuário não selecionado.");
+                    }
+                    else
+                    {
+                        usuario.cdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
+                    }
+
+                    //Validação Status
+                    if (ddlStatusUsuario.SelectedValue == "0")
+                    {
+                        throw new Exception("Erro: Status não selecionado.");
+                    }
+                    else
+                    {
+                        usuario.cdStatusUsuario = Convert.ToInt32(ddlStatusUsuario.SelectedValue);
+                    }
 
                     if (string.IsNullOrEmpty(hdfcdUsuario.Value))
                     {
@@ -130,7 +171,7 @@ namespace AppLicenseManager
                     }
 
                     _ctx.SaveChanges();
-                    Framework.Alerta("Sucesso", "Adicionado com sucesso", "success");
+                    Framework.Alerta("Sucesso", string.IsNullOrEmpty(hdfcdUsuario.Value) ? "Usuário adicionado com sucesso" : "Alterações efetuadas", "success");
                     LimpaCampos();
                     Framework.EscondePaineis(pnlCadastroUsuarios);
                     pnlGridUsuarios.Visible = true;
@@ -257,16 +298,16 @@ namespace AppLicenseManager
         #region Page_Load
         protected void Page_Load(object sender, EventArgs e)
         {
-            //#region AccessControl
-            //int cdUsuario = Convert.ToInt32(Session["cdUsuario"]);
-            //string PageName;
-            //PageName = Request.CurrentExecutionFilePath;
-            //PageName = PageName.Remove(0, PageName.IndexOf("/") + 1);
-            //if (VerificaPermissoes(cdUsuario, PageName) == false)
-            //{
-            //    Response.Redirect("Default2.aspx?permissao=err");
-            //}
-            //#endregion
+            #region AccessControl
+            int cdUsuario = Convert.ToInt32(Session["cdUsuario"]);
+            string PageName;
+            PageName = Request.CurrentExecutionFilePath;
+            PageName = PageName.Remove(0, PageName.IndexOf("/") + 1);
+            if (VerificaPermissoes(cdUsuario, PageName) == false)
+            {
+                Response.Redirect("Default2.aspx?permissao=err");
+            }
+            #endregion
 
             if (!IsPostBack)
             {

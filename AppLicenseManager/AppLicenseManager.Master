@@ -51,7 +51,7 @@
                         <%-- Home --%>
                         <li class="list-group-item">
                             <a class="menu-link" href="#">
-                                <span class="icon-link"></span>
+                                <span class="icon-link"><i class="fa-solid fa-house"></i></span>
                                 <span class="text-link">Home</span>
                             </a>
                         </li>
@@ -59,19 +59,19 @@
                         <%-- Usuários --%>
                         <li class="list-group-item">
                             <a class="menu-link" href="#usuariosMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="usuariosMenu">
-                                <span class="icon-link"></span>
+                                <span class="icon-link"><i class="fa-solid fa-user"></i></span>
                                 <span class="text-link">Usuários</span>
                             </a>
                             <ul class="collapse" id="usuariosMenu" data-parent="#menuAccordion">
                                 <li class="subMenu">
                                     <a class="subMenu-link" href="usuarios_gerenciarusuarios.aspx">
-                                        <span class="icon-link"></span>
+                                        <span class="icon-link"><i class="fa-solid fa-user-gear"></i></span>
                                         <span class="text-link">Gerenciar Usuários</span>
                                     </a>
                                 </li>
                                 <li class="subMenu">
                                     <a class="subMenu-link" href="profile.aspx">
-                                        <span class="icon-link"></span>
+                                        <span class="icon-link"><i class="fa-solid fa-eye"></i></span>
                                         <span class="text-link">Ver Perfil</span>
                                     </a>
                                 </li>
@@ -81,25 +81,25 @@
                         <%-- Licenças --%>
                         <li class="list-group-item">
                             <a class="menu-link" href="#licencasMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="licencasMenu">
-                                <span class="icon-link"></span>
+                                <span class="icon-link"><i class="fa-solid fa-key"></i></span>
                                 <span class="text-link">Licenças</span>
                             </a>
                             <ul class="collapse" id="licencasMenu" data-parent="#menuAccordion">
                                 <li class="subMenu">
                                     <a class="subMenu-link" href="licencas_fabricantes.aspx">
-                                        <span class="icon-link"></span>
+                                        <span class="icon-link"><i class="fa-solid fa-industry"></i></span>
                                         <span class="text-link">Fabricantes</span>
                                     </a>
                                 </li>
                                 <li class="subMenu">
                                     <a class="subMenu-link" href="licencas_softwares.aspx">
-                                        <span class="icon-link"></span>
+                                        <span class="icon-link"><i class="fa-regular fa-window-restore"></i></span>
                                         <span class="text-link">Softwares</span>
                                     </a>
                                 </li>
                                 <li class="subMenu">
                                     <a class="subMenu-link" href="licencas_chaveativacao.aspx">
-                                        <span class="icon-link"></span>
+                                        <span class="icon-link"><i class="fa-solid fa-key"></i></span>
                                         <span class="text-link">Chaves de Ativação</span>
                                     </a>
                                 </li>
@@ -109,7 +109,7 @@
                        <%-- Máquinas --%>
                         <li class="list-group-item">
                             <a class="menu-link" href="maquinas.aspx">
-                                <span class="icon-link"></span>
+                                <span class="icon-link"><i class="fa-solid fa-computer"></i></span>
                                 <span class="text-link">Máquinas</span>
                             </a>
                         </li>
@@ -117,13 +117,13 @@
                         <%-- Localização --%>
                         <li class="list-group-item">
                             <a class="menu-link" href="#localizacaoMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="localizacaoMenu">
-                                <span class="icon-link"></span>
+                                <span class="icon-link"><i class="fa-solid fa-location-crosshairs"></i></span>
                                 <span class="text-link">Localização</span>
                             </a>
                             <ul class="collapse" id="localizacaoMenu" data-parent="#menuAccordion">
                                 <li class="subMenu">
                                     <a class="subMenu-link" href="localizacao_setores.aspx">
-                                        <span class="icon-link"></span>
+                                        <span class="icon-link"><i class="fa-solid fa-location-dot"></i></span>
                                         <span class="text-link">Setores</span>
                                     </a>
                                 </li>
@@ -151,7 +151,7 @@
                             <ul class="dropdown-opGrid dropdown-menu">
                                 <li>
                                     <asp:LinkButton ID="lnkVerPerfil" CssClass="lnk-profileMenu" runat="server" OnClick="lnkVerPerfil_Click">
-                                            <span class="icon-profileMenu"><i class="fa-solid fa-user"></i></span>
+                                            <span class="icon-profileMenu"><i class="fa-solid fa-eye"></i></span>
                                             <span class="text-profileMenu">Ver Perfil</span>
                                     </asp:LinkButton>
 

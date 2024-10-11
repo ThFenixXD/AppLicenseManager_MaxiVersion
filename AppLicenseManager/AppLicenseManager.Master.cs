@@ -27,8 +27,12 @@ namespace AppLicenseManager
 
         protected void lnkSairApp_Click(object sender, EventArgs e)
         {
-            Session.Clear();
+            Session["Autenticado"] = 0;
+            Session["NomeUsuario"] =
+            Session["EmailUsuario"] =
+            Session["cdUsuario"] = string.Empty;
             Session.Abandon();
+            Session.Clear();
             Response.Redirect("~/login.aspx");
         } 
         #endregion

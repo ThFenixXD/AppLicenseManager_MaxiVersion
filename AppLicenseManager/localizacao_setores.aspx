@@ -78,7 +78,7 @@
                             <telerik:RadToolBarButton CssClass="ms-3 rtb-menu">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkAdicionarSetores" runat="server" OnClick="lnkAdicionarSetores_Click">
-                                        <span class="icon-rtb"><i class="fa-solid fa-location-crosshairs"></i></i></span>
+                                        <span class="icon-rtb"><i class="fa-solid fa-location-dot"></i></span>
                                         <span class="text-rtb">Novo Setor</span>
                                     </asp:LinkButton>
                                 </ItemTemplate>
@@ -159,8 +159,8 @@
             </div>
 
             <div>
-                <asp:Button ID="btn_salvar" runat="server" Text="Salvar Alterações" OnClick="btn_salvar_Click" />
-                <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar Alterações" OnClick="btn_cancelar_Click" />
+                <asp:Button ID="btn_salvar" runat="server" Text="Salvar Alterações" CssClass="btn_op btn_salvar" OnClick="btn_salvar_Click" />
+                <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar Alterações" CssClass="btn_op btn_cancelar" OnClick="btn_cancelar_Click" />
             </div>
         </div>
 
